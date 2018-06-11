@@ -43,9 +43,15 @@ Rob Bishop, Caleb Graves, Vineel Nagisetty
 
 As an NP-Complete problem, the game of sudoku can be reduced to a SAT solvable state by formalizing the rules into a series of conjunctive statements. We will present the process of this reduction here with the intention of creating a CNF file that may be used in a commercial SAT solver.\\
 
+\textbf{Problem Description}
+
+\emph{Instance:}  An $N$ by $N$ Sudoku grid, filled with an arbitrary amount of numbers with the symbols $\in [1,N]$ \\
+
+\emph{Accept:} if the Sudoku grid has a valid solution. A Sudoku grid is said to have a solution if for all rows, columns and n by n sub-squares, the Sudoku grid contains each of the $N$ possible numbers.\\ 
+
 \textbf{Sudoku rules primer}
 
-The rules of sudoku are explained here for completeness. The game is played on an $N\times N$ board where $N$ is a prime number. Here $N$ will be referred to as the order of the board, such that a $4 \times 4$ board is a board of order 4. Note that while the canonical version of Sudoku uses a board of order 9, the problem can be abstracted to arbitrarily sized boards.\\
+The rules of sudoku are explained here for completeness. The game is played on an $N\times N$ board where $N$ is a square. Here $N$ will be referred to as the order of the board, such that a $4 \times 4$ board is a board of order 4. Note that while the canonical version of Sudoku uses a board of order 9, the problem can be abstracted to arbitrarily sized boards.\\
 
 For the board to be completed in a winning state the following must all apply:
 \begin{itemize}
@@ -63,7 +69,7 @@ For the board to be completed in a winning state the following must all apply:
 
 \textbf{CNF Interpretation of Sudoku Rules}
 
-Here, we will use the notation $(rcv) | r,c,v \in [1, N]$ to represent the location and value of a cell. For example: $(123)$ represents a value of 3 in the cell at position $(1,2)$.
+Here, we will use the notation $x_{rcv} | r,c,v \in [1, N]$ to represent the location and value of a cell. This gives us $N^3$ possible variables. For example: $x_{123}$ represents a value of 3 in the cell at position $(1,2)$.
 
 To formalize the rules we will adopt the nomenclature from Kwon \& Jain\cite{sudokusat} and break the cell, row, column, and subsquare rules into two separate constraints: 
 
@@ -77,26 +83,26 @@ To formalize the rules we will adopt the nomenclature from Kwon \& Jain\cite{sud
 For cells, definedness requires listing each possible permutation of values for each cell: 
 
 $
-(000) \vee (001) \vee (002) ... \vee (00N) \wedge \\
-(010) \vee (011) \vee (012) ... \vee (01N) \wedge \\
+x_{000} \vee x_{001} \vee x_{002} ... \vee x_{00N} \wedge ... \\
+x_{010} \vee x_{011} \vee x_{012} ... \vee x_{01N} \wedge ... \\
 ...
 $
 
 For rows, columns, and subsquares definedness definedness is performed by fixing the values of the other variables and generating each possible permutation. For example, to represent definedness of a row we iterate through each permutation of $c,v$ and define a clause for each cell within the row:
 
 $
-(000) \vee (010) \vee (020) ... \vee (0N0) \wedge \\
-(001) \vee (011) \vee (021) ... \vee (0N1) \wedge \\
+x_{000} \vee x_{010} \vee x_{020} ... \vee x_{0N0} \wedge ... \\
+x_{001} \vee x_{011} \vee x_{021} ... \vee x_{0N1} \wedge ... \\
 ...
 $
 
 
 \item Uniqueness Constraints:\\
 Representing uniqueness in CNF is done by conjoining every possible permutation of duplicate values as negations. 
-For cells, for example we use the form $~(rcv_1) \vee ~(rcv_2)$ for each possible permutation of $v_1, v_2$:\\
+For cells, for example we use the form $\overline{(rcv_1)} \vee \overline{(rcv_2)}$ for each possible permutation of $v_1, v_2$:\\
 $
-~(000) \vee ~(001) \wedge \\
-~(000) \vee ~(002) \wedge \\
+\overline{x_{000}} \vee \overline{x_{001}} \wedge ... \\
+\overline{x_{000}} \vee \overline{x_{002}} \wedge ... \\
 ...
 $
 
@@ -107,6 +113,11 @@ This same approach holds for rows, column and subsquares. Though defining iterat
 \textbf{Defining the Playing Field}
 
 Typical sudoku puzzles begin with a board of mostly empty squares with several values already filled in. To represent these pre-defined squares in the above form, you simply append a single $(rcv)$ representing each filled cell. Doing so will allow a traditional SAT solver to determine if the board has a solution (obviously all commercial puzzles have a solution, but the reduction presented here will determine the satisfiability of any arbitrarily filled board).\\
+
+\textbf{Solving the Instance with Output from SAT Solver}
+
+We can build the solution from a satisfiable output from a SAT solver (assuming there is one). A valid solution will output $N^2$ true assignments of the form $x_{rcv}$ which give the row, column and value for each cell of the board. We can take those values and build a valid Sudoku grid from them.\\
+
 
 \textbf{Conclusion and Performance}
 
