@@ -2,7 +2,7 @@ from sudoku import Sudoku
 import pickle
 
 
-class Generator:
+class Generator2:
     """
     A class that generates random instances of our sudoku board problem.
     It takes in a size, and random_numbers value and generates a list based on this.
@@ -18,12 +18,9 @@ class Generator:
         self.board.randomize_board(self.k_value)
         result = self.board.regular_output()
         print(result)
+
         with open(self.path, 'wb') as fp:
             pickle.dump(result, fp)
-
-        with open(self.path, 'w') as f:
-            for item in result:
-                f.write("%s\n" % item)
 
     def print_board(self, result):
         for row in range(self.size):
@@ -34,6 +31,6 @@ class Generator:
                 else:
                     print("x", end= " ")
 
-generate = Generator()
+generate = Generator2()
 generate.generate()
 
