@@ -2,13 +2,13 @@ from sudoku import Sudoku
 import pickle
 
 
-class Generator2:
+class Generator:
     """
     A class that generates random instances of our sudoku board problem.
     It takes in a size, and random_numbers value and generates a list based on this.
     """
 
-    def __init__(self, size=9, k_value=13, path='output'):
+    def __init__(self, path='output', size=9, k_value=13):
         self.size = size
         self.k_value = k_value
         self.board = Sudoku(self.size)
@@ -31,6 +31,4 @@ class Generator2:
                 else:
                     print("x", end= " ")
 
-generate = Generator2()
-generate.generate()
 
