@@ -49,6 +49,15 @@ class Sudoku:
                 output += '\n'
         return output
 
+    def regular_output(self):
+        output = []
+        for i in range(self.degree):
+            for j in range(self.degree):
+                num = self.matrix[i][j]
+                if num == 0: continue
+                output.append([i,j,num])
+        return output
+
     def randomize_board(self, num_cells):
         for n in range(num_cells):
             self._draw_random_number()
