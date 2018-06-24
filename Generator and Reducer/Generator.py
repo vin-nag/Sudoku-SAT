@@ -21,6 +21,10 @@ class Generator:
         with open(self.path, 'wb') as fp:
             pickle.dump(result, fp)
 
+        with open(self.path, 'w') as f:
+            for item in result:
+                f.write("%s\n" % item)
+
     def print_board(self, result):
         for row in range(self.size):
             print(" ")
