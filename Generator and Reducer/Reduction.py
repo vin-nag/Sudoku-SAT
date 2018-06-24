@@ -1,4 +1,4 @@
-import subprocess, tempfile, pickle
+import pickle
 
 class Reducer():
 
@@ -16,5 +16,3 @@ class Reducer():
 
         print(itemlist)
 
-reducer = Reducer()
-reducer.create_cnf_file()
