@@ -35,6 +35,5 @@ if result[0] == "U":
     print("This board has no solution")
 
 else:
-    print("This board has a solution")
-    print("Solution: ")
+    print("This board has a solution: ")
     generator.print_solution([int(x) for x in result.split(' ') if x.isdigit()])
