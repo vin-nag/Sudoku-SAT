@@ -54,14 +54,13 @@ class Generator:
         This method prints out the Sudoku board in a readable format
         :return: None
         """
-        rows = '123456789'
-        cols = '123456789'
+        row = [str(x) for x in range(1,self.size+1)]
 
         # this part prints out the board in a human readable format
-        for i,r in enumerate(rows):
+        for i,r in enumerate(row):
             if i in [3,6]:
                 print('------+-------+------')
-            for j,c in enumerate(cols):
+            for j,c in enumerate(row):
                 if j in [3,6]:
                     print('|',end=" ")
                 if r+c in self.d:
@@ -70,3 +69,22 @@ class Generator:
                     print(0, end = " ")
             print(" ")
         return
+
+
+    def print_solution(self, lst):
+        """
+        This method prints out the solution of a Sudoku board
+        :param lst:
+        :return: None
+        """
+        self.d.clear()
+
+        for item in lst:
+            temp = str(item)
+            key = temp[0] + temp[1]
+            value = temp[2]
+            self.d[key] = value
+
+        self.print_board()
+        return
+
