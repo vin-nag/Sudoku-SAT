@@ -21,6 +21,17 @@ class Reducer():
         self.cnf = ""
         return
 
+    def return_cnf_data(self):
+
+        self.get_Sudoku_cnf_constraints()
+
+        # Update the cnf string with the generated board
+        self.get_generated_data()
+
+        # Update the header value from info generated
+        cnf_header = self.create_cnf_header()
+
+        return self.cnf + cnf_header
 
     def create_cnf_file(self):
         """

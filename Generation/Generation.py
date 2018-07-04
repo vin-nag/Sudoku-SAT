@@ -1,4 +1,5 @@
 from sudoku import Sudoku
+import math
 import pickle
 
 class Generator:
@@ -55,13 +56,16 @@ class Generator:
         :return: None
         """
         row = [str(x) for x in range(1,self.size+1)]
+        cutoff = {x for x in range(2,self.size) if x%math.sqrt(self.size)==0}
+
+        line = '-' * int(math.sqrt(self.size)) + '+' + '-'*int(math.sqrt(self.size))
 
         # this part prints out the board in a human readable format
         for i,r in enumerate(row):
-            if i in [3,6]:
-                print('------+-------+------')
+            if i in cutoff:
+                print(line*int(math.sqrt(self.size)))
             for j,c in enumerate(row):
-                if j in [3,6]:
+                if j in cutoff:
                     print('|',end=" ")
                 if r+c in self.d:
                     print (self.d[r + c], end=" ")
