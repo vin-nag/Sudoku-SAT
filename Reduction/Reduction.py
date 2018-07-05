@@ -26,12 +26,12 @@ class Reducer():
         self.get_Sudoku_cnf_constraints()
 
         # Update the cnf string with the generated board
-        self.get_generated_data()
+        # self.get_generated_data()
 
         # Update the header value from info generated
         cnf_header = self.create_cnf_header()
 
-        return self.cnf + cnf_header
+        return cnf_header + self.cnf
 
     def create_cnf_file(self):
         """
@@ -80,7 +80,7 @@ class Reducer():
         cnf_comment += 'c k Value = ' + str(self.k_value) + ' \n'
 
         # find number of clauses
-        clause_count = str.count(self.cnf, "0")
+        clause_count = str.count(self.cnf, "\n")
 
         var_count = str(self.size) + str(self.size) + str(self.size)
         # add variable number, clause number to problem line

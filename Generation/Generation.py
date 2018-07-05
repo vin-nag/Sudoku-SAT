@@ -22,7 +22,7 @@ class Generator:
         self.d = dict()
         return
 
-    def generate(self):
+    def generate(self, print_board=True, save=True):
         """
         This method generates a random Sudoku board using a method from Sudoku class
         :return: None
@@ -41,12 +41,14 @@ class Generator:
             value = str(item[2])
             self.d[key] = value
 
-        print("Generated Board: ")
-        self.print_board()
+        if print_board:
+            print("Generated Board: ")
+            self.print_board()
 
         # Store the generated values using pickle
-        with open(self.path, 'wb') as fp:
-            pickle.dump(result, fp)
+        if save:
+            with open(self.path, 'wb') as fp:
+                pickle.dump(result, fp)
         return
 
 
