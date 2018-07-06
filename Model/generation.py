@@ -1,4 +1,4 @@
-from sudoku import Sudoku
+from Model.sudoku import Sudoku
 import math
 import pickle
 
@@ -94,3 +94,5 @@ class Generator:
         self.print_board()
         return
 
+generator = Generator()
+generator.generate()
