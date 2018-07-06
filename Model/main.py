@@ -1,6 +1,6 @@
 # Import Generation and Reduction programs and other necessary programs for the Solver
-from Generation import Generator
-from Reduction import Reducer
+from generation import Generator
+from reduction import Reducer
 import subprocess
 import tempfile
 
@@ -17,7 +17,7 @@ generator.generate()
 reducer = Reducer(PATH_NAME)
 reducer.create_cnf_file()
 
-# Create a Solver to test if the cnf file is Satisfiable or Unsatisfiable.
+# Create a Solver to test if the CNF file is Satisfiable or Unsatisfiable.
 # Note that you need minisat on your computer to run this
 bashCommand = 'minisat %s %s' # command to run on the terminal
 
@@ -25,7 +25,7 @@ bashCommand = 'minisat %s %s' # command to run on the terminal
 output_file = tempfile.NamedTemporaryFile()
 
 # Call the bash terminal
-subprocess.call(bashCommand % (PATH_NAME+".cnf", output_file.name), shell=True, stdout = subprocess.PIPE)
+subprocess.call(bashCommand % (PATH_NAME+".CNF", output_file.name), shell=True, stdout = subprocess.PIPE)
 
 # Print result
 result = output_file.read().decode("utf-8")

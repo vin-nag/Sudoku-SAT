@@ -5,7 +5,7 @@ import itertools as it
 class Reducer():
     """
     This class take as an input a name of a file containing an instance of our Sudoku problem and
-    produces a file with a CNF formula encoding of this instance in .cnf format.
+    produces a file with a CNF formula encoding of this instance in .CNF format.
     """
 
     def __init__(self, path='output', size=9, k_value=13):
@@ -25,7 +25,7 @@ class Reducer():
 
         self.get_Sudoku_cnf_constraints()
 
-        # Update the cnf string with the generated board
+        # Update the CNF string with the generated board
         # self.get_generated_data()
 
         # Update the header value from info generated
@@ -35,20 +35,20 @@ class Reducer():
 
     def create_cnf_file(self):
         """
-        This method creates the cnf file
+        This method creates the CNF file
         :return: None
         """
-        # Update the cnf string with all the Sudoku constraints in cnf form
+        # Update the CNF string with all the Sudoku constraints in CNF form
         self.get_Sudoku_cnf_constraints()
 
-        # Update the cnf string with the generated board
+        # Update the CNF string with the generated board
         self.get_generated_data()
 
         # Update the header value from info generated
         cnf_header = self.create_cnf_header()
 
-        # print all values to a .cnf format file
-        with open(self.path+'.cnf', 'w') as f:
+        # print all values to a .CNF format file
+        with open(self.path+'.CNF', 'w') as f:
             f.write(cnf_header)
             f.write(self.cnf)
         return
@@ -56,7 +56,7 @@ class Reducer():
 
     def get_generated_data(self):
         """
-        This method gets the generated board data and updates to cnf string
+        This method gets the generated board CNF and updates to CNF string
         :return: None
         """
         # Get the values of the generated board
@@ -72,10 +72,10 @@ class Reducer():
     def create_cnf_header(self):
         """
         This method creates a header
-        :return: cnf header as a string
+        :return: CNF header as a string
         """
         # add info to the comments
-        cnf_comment = 'c Sudoku-SAT cnf file by Bishop, Robert; Graves, Caleb; and Nagisetty, Vineel \n'
+        cnf_comment = 'c Sudoku-SAT CNF file by Bishop, Robert; Graves, Caleb; and Nagisetty, Vineel \n'
         cnf_comment += 'c Size of board =' + str(self.size) + " by " + str(self.size) + ' \n'
         cnf_comment += 'c k Value = ' + str(self.k_value) + ' \n'
 
@@ -84,13 +84,13 @@ class Reducer():
 
         var_count = str(self.size) + str(self.size) + str(self.size)
         # add variable number, clause number to problem line
-        cnf_p_line = 'p cnf ' + var_count + ' ' + str(clause_count) + '\n'
+        cnf_p_line = 'p CNF ' + var_count + ' ' + str(clause_count) + '\n'
         return cnf_comment + cnf_p_line
 
 
     def get_Sudoku_cnf_constraints(self):
         """
-        This method updates the cnf string with all of the Sudoku game constraints
+        This method updates the CNF string with all of the Sudoku game constraints
         :return: None
         """
         self.cnf += self.cell_definedness()
@@ -106,7 +106,7 @@ class Reducer():
 
     def cell_definedness(self):
         """
-        This method updates the cnf string with the cell definedness constraint
+        This method updates the CNF string with the cell definedness constraint
         :return: cell definedness constraint as a string
         """
         line = ""
@@ -120,7 +120,7 @@ class Reducer():
 
     def cell_uniqueness(self):
         """
-        This method updates the cnf string with the cell uniqueness constraint
+        This method updates the CNF string with the cell uniqueness constraint
         :return: cell uniqueness constraint as a string
         """
         line = ""
@@ -133,7 +133,7 @@ class Reducer():
 
     def row_definedness(self):
         """
-        This method updates the cnf string with the row definedness constraint
+        This method updates the CNF string with the row definedness constraint
         :return: row definedness constraint as a string
         """
         line = ""
@@ -147,7 +147,7 @@ class Reducer():
 
     def row_uniqueness(self):
         """
-         This method updates the cnf string with the row uniqueness constraint
+         This method updates the CNF string with the row uniqueness constraint
         :return: row uniqueness constraint as a string
         """
         line = ""
@@ -160,7 +160,7 @@ class Reducer():
 
     def column_definedness(self):
         """
-         This method updates the cnf string with the column definedness constraint
+         This method updates the CNF string with the column definedness constraint
         :return: column definedness constraint as a string
         """
         line = ""
@@ -174,7 +174,7 @@ class Reducer():
 
     def column_uniqueness(self):
         """
-         This method updates the cnf string with the column uniqueness constraint
+         This method updates the CNF string with the column uniqueness constraint
         :return: column uniqueness constraint as a string
         """
         line = ""
@@ -187,7 +187,7 @@ class Reducer():
 
     def block_definedness(self):
         """
-         This method updates the cnf string with the block definedness constraint
+         This method updates the CNF string with the block definedness constraint
         :return: block definedness constraint as a string
         """
         line = ""
@@ -204,7 +204,7 @@ class Reducer():
 
     def block_uniqueness(self):
         """
-         This method updates the cnf string with the block uniqueness constraint
+         This method updates the CNF string with the block uniqueness constraint
         :return: block uniqueness constraint as a string
         """
         line=""
