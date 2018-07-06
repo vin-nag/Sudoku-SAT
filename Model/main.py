@@ -14,7 +14,7 @@ generator = Generator(PATH_NAME, BOARD_SIZE, K_VALUE)
 generator.generate()
 
 # Pass this file name and reduce to CNF using Reduction file
-reducer = Reducer(PATH_NAME)
+reducer = Reducer(PATH_NAME, BOARD_SIZE)
 reducer.create_cnf_file()
 
 # Create a Solver to test if the CNF file is Satisfiable or Unsatisfiable.
@@ -25,7 +25,7 @@ bashCommand = 'minisat %s %s' # command to run on the terminal
 output_file = tempfile.NamedTemporaryFile()
 
 # Call the bash terminal
-subprocess.call(bashCommand % (PATH_NAME+".CNF", output_file.name), shell=True, stdout = subprocess.PIPE)
+subprocess.call(bashCommand % (PATH_NAME+".cnf", output_file.name), shell=True, stdout = subprocess.PIPE)
 
 # Print result
 result = output_file.read().decode("utf-8")

@@ -76,13 +76,15 @@ class Reducer():
         """
         # add info to the comments
         cnf_comment = 'c Sudoku-SAT CNF file by Bishop, Robert; Graves, Caleb; and Nagisetty, Vineel \n'
-        cnf_comment += 'c Size of board =' + str(self.size) + " by " + str(self.size) + ' \n'
-        cnf_comment += 'c k Value = ' + str(self.k_value) + ' \n'
+        cnf_comment += 'c Order of Sudoku board = ' + str(self.size) + ' \n'
+        cnf_comment += 'c k-Value = ' + str(self.k_value) + ' \n'
 
         # find number of clauses
         clause_count = str.count(self.cnf, "\n")
 
+        # number of variables
         var_count = str(self.size) + str(self.size) + str(self.size)
+
         # add variable number, clause number to problem line
         cnf_p_line = 'p CNF ' + var_count + ' ' + str(clause_count) + '\n'
         return cnf_comment + cnf_p_line
