@@ -1,6 +1,6 @@
 # Sudoku as a SAT Problem #
 
-![Game Screenshot](https://github.com/vin-nag/Sudoku-SAT/blob/master/Results/sudoku.png "Unsolved Sudoku Grid")
+<center> <img src="https://github.com/vin-nag/Sudoku-SAT/blob/master/Results/sudoku.png" alt="Unsolved Sudoku Grid" width="300px"/> </center>
 
 ## Table of Contents
 * Introduction
