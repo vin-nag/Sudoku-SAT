@@ -1,6 +1,6 @@
 # Sudoku as a SAT Problem #
 ## Bishop, Robert; Graves, Caleb; and Nagisetty, Vineel ##
-<center> <img src="https://github.com/vin-nag/Sudoku-SAT/blob/master/Results/sudoku.png" alt="Unsolved Sudoku Grid" width="300px"/> </center>
+<center> <img src="https://github.com/vin-nag/Sudoku-SAT/blob/master/Experiments/Results/sudoku.png" alt="Unsolved Sudoku Grid" width="300px"/> </center>
 
 ## Table of Contents
 * Introduction
